@@ -4,18 +4,23 @@ on:
   push:
     branches:
       - lesson-5-complete
+
 jobs:
   security_test:
+    name: Execute the PyCharm security test
     runs-on: ubuntu-latest
+
     defaults:
       run:
         working-directory: backend
-    name: Execute the PyCharm security test
+
     steps:
       - uses: actions/checkout@v4
+
       - name: Disable Debug
         run: |
           sed -i 's/DEBUG = True/DEBUG = False/g' hangry_api/hangry_api/settings.py
+
       - name: Run PyCharm Security
         uses: tonybaloney/pycharm-security@master
         with:
